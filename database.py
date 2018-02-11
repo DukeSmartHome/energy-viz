@@ -4,7 +4,7 @@ class Database():
     
     def __init__(self):
         # Open database connection
-        self.db = pymysql.connect("rapid-814.vm.duke.edu","root","test","smart_home_data")
+        self.db = pymysql.connect("rapid-814.vm.duke.edu","root","y0ungerisn0w0lder","smart_home_data")
 
         # prepare a cursor object using cursor() method
         self.cursor = self.db.cursor()
