@@ -4,13 +4,15 @@ from xml.etree.ElementTree import fromstring
 from json import dumps, loads
 
 class EnergyData:
-    appliances = [
-    "http://152.3.3.210/cgi-bin/egauge?noteam",
-    "http://152.3.3.214/cgi-bin/egauge?noteam",
-    "http://152.3.3.235/cgi-bin/egauge?noteam",
-    "http://152.3.3.213/cgi-bin/egauge?noteam"]
-    utilities = ["http://152.3.3.246/cgi-bin/egauge?noteam",
-    "http://152.3.3.236/cgi-bin/egauge?noteam"]
+    
+    def __init__(self):
+        self.appliances = [
+        "http://152.3.3.210/cgi-bin/egauge?noteam",
+        "http://152.3.3.214/cgi-bin/egauge?noteam",
+        "http://152.3.3.235/cgi-bin/egauge?noteam",
+        "http://152.3.3.213/cgi-bin/egauge?noteam"]
+        self.utilities = ["http://152.3.3.246/cgi-bin/egauge?noteam",
+        "http://152.3.3.236/cgi-bin/egauge?noteam"]
 
     def getUtilities(self):
         return self.getInfo(self.utilities)
@@ -29,7 +31,3 @@ class EnergyData:
                 rt.append({"timestamp":timestamp, "source":i["@title"], "energy":i["energyWs"]["$"],"power":i["power"]["$"] })
         return rt
 
-a = EnergyData()
-print(a.getUtilities())
-print()
-print(a.getAppliances())
