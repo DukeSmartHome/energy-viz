@@ -9,4 +9,4 @@ if __name__ == '__main__':
     while True:
         database.insertAppliances(energyData.getAppliances())
         database.insertUtilities(energyData.getUtilities())
-        time.sleep(5)
+        time.sleep(300)
