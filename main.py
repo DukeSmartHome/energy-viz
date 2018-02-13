@@ -14,4 +14,4 @@ if __name__ == '__main__':
         except:
             print("error")
 
-        time.sleep(1)
+        time.sleep(300)
