@@ -4,7 +4,7 @@ from xml.etree.ElementTree import fromstring
 from json import dumps, loads
 
 class EnergyData:
-    
+
     def __init__(self):
         self.appliances = [
         "http://152.3.3.210/cgi-bin/egauge?noteam",
@@ -23,11 +23,14 @@ class EnergyData:
     def getInfo(self, urls):
         rt = []
         for i in urls: #
-            r = requests.get(i) # r is a request object
-            d = loads(dumps(bf.data(fromstring(r.text)), indent = 4)) # r.text is the xml, bf.data returns OrderedDicts, load+dumps converts to Dict
-            timestamp = d["measurements"]["timestamp"]["$"]
-            for i in d["measurements"]["meter"]:
-                # print("{:<40} {:<20} {:<20}".format(i["@title"],i["energyWs"]["$"],i["power"]["$"]))
-                rt.append({"timestamp":timestamp, "source":i["@title"], "energy":i["energyWs"]["$"],"power":i["power"]["$"] })
-        return rt
+            try:
+                r = requests.get(i) # r is a request object
+                d = loads(dumps(bf.data(fromstring(r.text)), indent = 4)) # r.text is the xml, bf.data returns OrderedDicts, load+dumps converts to Dict
+                timestamp = d["measurements"]["timestamp"]["$"]
+                for i in d["measurements"]["meter"]:
+                    # print("{:<40} {:<20} {:<20}".format(i["@title"],i["energyWs"]["$"],i["power"]["$"]))
+                    rt.append({"timestamp":timestamp, "source":i["@title"], "energy":i["energyWs"]["$"],"power":i["power"]["$"] })
+            except:
+                print("network error")
 
+        return rt
